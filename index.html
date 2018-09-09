@@ -159,6 +159,12 @@
   }
   </script>
 
+
+  <ul id="list">
+
+
+  </ul>
+
 <p>You have tracked <span id="headacheCount">0</span> days of headaches recently.<p>
 <p>Be sure to ask your doctor about: <span></span></p>
 <script>
@@ -170,19 +176,35 @@
   var jsonResponse = JSON.parse(req.responseText);
   console.log(jsonResponse.length);
   console.log(jsonResponse);
-  // var count;
-  // for(i=0; i>jsonResponse.length, i++;) {
-  //   console.log(jsonResponse[i])
-  //   if (!jsonResponse[i].hasOwnProperty('headaches')){continue;}
-  //     if ( jsonResponse[i].headaches == 1) {
-  //       count = count + 1
-  //     }
-  //     console.log(count)
-  //     document.getElementById("headacheCount").innerHTML = count;
-  // }
+  //need to choose the right date in the next line
+  var p = jsonResponse[7];
+  //find way to return object of specific date
+  function addLi () {
+    var ul = document.getElementById("list");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(key.toString()));
+    ul.appendChild(li);
+  }
+  for (var key in p) {
+      if (p.hasOwnProperty(key) && p[key] == 1) {
+          addLi()
+      }
+  }
+  var count = 0;
+  for(i=0; i<jsonResponse.length; i++) {
+    console.log(jsonResponse[i]);
+    if (jsonResponse[i].hasOwnProperty("headaches")) {
+      if (jsonResponse[i].headaches == 1) {
+        count += 1
+      }
+    }
+    document.getElementById("headacheCount").innerHTML = count
+  }
   };
-  req.send(null);
+  req.send(null)
 </script>
+
+
 
 
 
