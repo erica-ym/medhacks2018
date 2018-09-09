@@ -24,6 +24,18 @@ app.get('/', function(req,res){
 	res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/find', function(req, res) {
+    db.collection("daysymptoms").find({
+    }).toArray(function(err, result) {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        res.send(result)
+      }
+    });
+})
+
 app.post('/submit', function(req, res) {
   console.log(req.body)
   //send to mongoose here

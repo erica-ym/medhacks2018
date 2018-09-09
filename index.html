@@ -159,6 +159,32 @@
   }
   </script>
 
+<p>You have tracked <span id="headacheCount">0</span> days of headaches recently.<p>
+<p>Be sure to ask your doctor about: <span></span></p>
+<script>
+  var req = new XMLHttpRequest();
+  req.overrideMimeType("application/json");
+  const url='http://localhost:8080/find';
+  req.open('GET', url, true);
+  req.onload  = function() {
+  var jsonResponse = JSON.parse(req.responseText);
+  console.log(jsonResponse.length);
+  console.log(jsonResponse);
+  // var count;
+  // for(i=0; i>jsonResponse.length, i++;) {
+  //   console.log(jsonResponse[i])
+  //   if (!jsonResponse[i].hasOwnProperty('headaches')){continue;}
+  //     if ( jsonResponse[i].headaches == 1) {
+  //       count = count + 1
+  //     }
+  //     console.log(count)
+  //     document.getElementById("headacheCount").innerHTML = count;
+  // }
+  };
+  req.send(null);
+</script>
+
+
 
 </body>
 </html>
